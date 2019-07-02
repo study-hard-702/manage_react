@@ -1,0 +1,47 @@
+.Header {
+  background: #51a5d5;
+  color: #fff;
+  line-height: 50px;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  &-logo {
+    float: left;
+    width: 230px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    img {
+      height: 19px;
+      vertical-align: sub;
+      margin-right: 10px;
+    }
+    &-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  &-menu {
+    float: right;
+    li {
+      float: left;
+      padding: 0 15px;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    &-userName:before, &-logout:before {
+      box-sizing: border-box;
+      margin-right: 3px;
+    }
+    &-userName:before {
+      content: "\f007";
+    }
+    &-logout:before {
+      content: "\f08b";
+    }
+  }
+}

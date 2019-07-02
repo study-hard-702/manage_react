@@ -2,13 +2,17 @@ import * as React from "react";
 import {connect} from 'react-redux';
 import BaseComponent from "../../BaseComponent";
 import './style.less';
+import {actionCreators as myAction} from "./store"
 import {actionCreators} from "../HomeNav/store"
+import {fullScreen, fullExit} from "../../../utils/browser"
 
 export interface HomeMainProps {
   navList?: any;
   currentNav?: any;
+  fullScreenFlag?: boolean;
   setCurrentNode?: (obj: any) => any;
   delCurrentNode?: (e: any, id: number) => any;
+  switchFullscreen?: (flag: boolean) => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -24,7 +28,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
-    const {currentNav, navList, setCurrentNode, delCurrentNode} = this.props;
+    const {currentNav, navList, fullScreenFlag, setCurrentNode, delCurrentNode, switchFullscreen} = this.props;
     return (
       <div className="HomeMain">
         <div className="HomeMain-nav">
@@ -47,6 +51,13 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
             }
           </ul>
           <div className="HomeMain-right">
+            <span className="HomeMain-right-qp iconfont"
+                  onClick={() => {
+                    fullScreenFlag ? fullExit() : fullScreen();
+                    if (switchFullscreen) {
+                      switchFullscreen(!fullScreenFlag)
+                    }
+                  }}></span>
             <span className="HomeMain-right-toRignt iconfont"></span>
           </div>
         </div>
@@ -59,7 +70,8 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
 function mapStateToProps(state: any): HomeMainProps {
   return {
     navList: state.getIn(['homeNav', 'navList']),
-    currentNav: state.getIn(['homeNav', 'currentNav'])
+    currentNav: state.getIn(['homeNav', 'currentNav']),
+    fullScreenFlag: state.getIn(['homeMain', 'fullScreenFlag'])
   };
 }
 
@@ -74,6 +86,9 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
       // 阻止与原生事件的冒泡
       e.nativeEvent.stopImmediatePropagation();
       dispatch(actionCreators.deleteNode(id))
+    },
+    switchFullscreen(flag) {
+      dispatch(myAction.switchFullscreen(flag))
     }
   }
 }

@@ -1,6 +1,7 @@
 .HomeNav {
-  width: 230px;
+  width: 220px;
   height: 100%;
+  padding-left: 10px;
   background: #f3f5f6;
   text-align: left;
   position: absolute;
@@ -8,4 +9,7 @@
   top: 0;
   padding-top: 50px;
   z-index: 99;
+  /deep/ .ant-tree.ant-tree-show-line li span.ant-tree-switcher{
+    background: none;
+  }
 }

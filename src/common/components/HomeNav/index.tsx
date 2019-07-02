@@ -49,7 +49,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
               name: props.title,
               id: checkedKeys[0]
             }
-            if (selectNode) {
+            if (selectNode && !props.children) {
               selectNode(obj)
             }
           }}>

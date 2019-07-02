@@ -17,7 +17,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     const {setCurrentNode} = this.props;
     if (setCurrentNode) {
       setCurrentNode({
-        id: 0,
+        id: 1,
         name: "工作台",
       })
     }

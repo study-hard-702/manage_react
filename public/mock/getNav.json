@@ -1,36 +1,36 @@
 {
   "data": [
     {
-      "id": 0,
+      "id": 1,
       "name": "工作台",
       "children": []
     },
     {
-      "id": 1,
+      "id": 2,
       "name": "产品管理",
       "children": [
         {
-          "id": 11,
+          "id": 21,
           "name": "我的产品",
-          "parentId": 1,
+          "parentId": 2,
           "children": []
         },
         {
-          "id": 12,
+          "id": 22,
           "name": "所有产品",
-          "parentId": 1,
+          "parentId": 2,
           "children": []
         },
         {
-          "id": 13,
+          "id": 23,
           "name": "创建产品",
-          "parentId": 1,
+          "parentId": 2,
           "children": []
         }
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "审核管理",
       "children": []
     }

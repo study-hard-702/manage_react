@@ -1,6 +1,11 @@
 {
   "data": [
     {
+      "id": 0,
+      "name": "工作台",
+      "children": []
+    },
+    {
       "id": 1,
       "name": "产品管理",
       "children": [

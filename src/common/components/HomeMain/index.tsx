@@ -13,11 +13,24 @@ export interface HomeMainProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class HomeMain extends BaseComponent<HomeMainProps, {}> {
+  componentWillMount() {
+    const {setCurrentNode} = this.props;
+    if (setCurrentNode) {
+      setCurrentNode({
+        id: 0,
+        name: "工作台",
+      })
+    }
+  }
+
   doRender(): React.ReactElement<{}> {
     const {currentNav, navList, setCurrentNode, delCurrentNode} = this.props;
     return (
       <div className="HomeMain">
         <div className="HomeMain-nav">
+          <div className="HomeMain-left">
+            <span className="HomeMain-left-toLeft iconfont"></span>
+          </div>
           <ul className="HomeMain-navList">
             {
               navList.map((item: any) => {
@@ -33,6 +46,9 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
               })
             }
           </ul>
+          <div className="HomeMain-right">
+            <span className="HomeMain-right-toRignt iconfont"></span>
+          </div>
         </div>
         {currentNav.name}
       </div>

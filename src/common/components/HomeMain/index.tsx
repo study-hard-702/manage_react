@@ -44,6 +44,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
       handleNode,
       switchFullscreen,
     } = this.props;
+    // console.log(menuList, 'navList')
     return (
       <div className="HomeMain">
         <div className="HomeMain-nav">

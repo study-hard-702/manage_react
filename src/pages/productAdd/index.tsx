@@ -14,7 +14,7 @@ class ProductAdd extends BaseComponent<ProductAddProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="ProductAdd">
-
+        88888
       </div>
     );
   }

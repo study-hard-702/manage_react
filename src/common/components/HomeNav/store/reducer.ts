@@ -31,33 +31,29 @@ export default (state = defaultState, action: any) => {
         currentNav: newNavList.size >= 1 ? newNavList.get(newNavList.size - 1) : {}
       })
     case constants.HANDLE_NODE:
-      switch (action.handleType) {
-        case 1:
-          break;
-        case 2:
-          const NavList3 = navList.filter((item: any) => {
-            return item.id !== state.getIn(['currentNav', 'id'])
-          })
-          return state.merge({
-            navList: NavList3,
-            currentNav: NavList3.size >= 1 ? NavList3.get(NavList3.size - 1) : {}
-          });
-          break;
-        case 3:
-          return state.merge({
-            currentNav: {},
-            navList: fromJS([])
-          });
-          break;
-        case 4:
-          const NavList4 = navList.filter((item: any) => {
-            return item.id === state.getIn(['currentNav', 'id'])
-          })
-          return state.merge({
-            navList: NavList4,
-            currentNav: NavList4.get(0)
-          });
-          break;
+      if(action.handleType === 2){
+        const NavList3 = navList.filter((item: any) => {
+          return item.id !== state.getIn(['currentNav', 'id'])
+        })
+        return state.merge({
+          navList: NavList3,
+          currentNav: NavList3.size >= 1 ? NavList3.get(NavList3.size - 1) : {}
+        })
+      }
+      if(action.handleType === 3){
+        return state.merge({
+          currentNav: {},
+          navList: fromJS([])
+        })
+      }
+      if(action.handleType === 4){
+        const NavList4 = navList.filter((item: any) => {
+          return item.id === state.getIn(['currentNav', 'id'])
+        })
+        return state.merge({
+          navList: NavList4,
+          currentNav: NavList4.get(0)
+        })
       }
     default:
       return state;

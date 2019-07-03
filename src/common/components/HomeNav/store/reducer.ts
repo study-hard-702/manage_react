@@ -37,7 +37,7 @@ export default (state = defaultState, action: any) => {
           })
           return state.merge({
             navList: NavList3,
-            currentNav: NavList3.get(NavList3.size - 1)
+            currentNav: NavList3.size >= 1 ? NavList3.get(NavList3.size - 1) : {}
           });
           break;
         case 3:

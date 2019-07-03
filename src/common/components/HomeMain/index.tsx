@@ -10,10 +10,10 @@ export interface HomeMainProps {
   navList?: any;
   currentNav?: any;
   fullScreenFlag?: boolean;
-  setCurrentNode?: (obj: any) => any;
-  delCurrentNode?: (e: any, id: number) => any;
+  selectNode?: (obj: any) => any;
+  deleteNode?: (e: any, id: number) => any;
+  handleNode?: (e: any, handleType: string) => any;
   switchFullscreen?: (flag: boolean) => any;
-  handleMenu?: (e: any, type: string) => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -23,11 +23,11 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
   }
 
   componentWillMount() {
-    const {setCurrentNode} = this.props;
-    if (setCurrentNode) {
-      setCurrentNode({
-        id: 1,
+    const {selectNode} = this.props;
+    if (selectNode) {
+      selectNode({
         name: "工作台",
+        id: 1,
       })
     }
   }
@@ -37,10 +37,10 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
       currentNav,
       navList,
       fullScreenFlag,
-      setCurrentNode,
-      delCurrentNode,
+      selectNode,
+      deleteNode,
+      handleNode,
       switchFullscreen,
-      handleMenu
     } = this.props;
     return (
       <div className="HomeMain">
@@ -54,10 +54,10 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
                 return (
                   <li key={item.id}
                       className={item.id === currentNav.id ? 'HomeMain-currentNav' : ''}
-                      onClick={() => setCurrentNode ? setCurrentNode(item) : null}>
+                      onClick={() => selectNode ? selectNode(item) : null}>
                     {item.name}
                     <i className="HomeMain-navList-close iconfont"
-                       onClick={(e) => delCurrentNode ? delCurrentNode(e, item.id) : null}></i>
+                       onClick={(e) => deleteNode ? deleteNode(e, item.id) : null}></i>
                   </li>
                 )
               })
@@ -81,10 +81,10 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
               {
                 this.state.showMenu ?
                   <ul>
-                    <li onClick={(e) => handleMenu ? handleMenu(e, '1') : null}>刷新当前</li>
-                    <li onClick={(e) => handleMenu ? handleMenu(e, '2') : null}>关闭当前</li>
-                    <li onClick={(e) => handleMenu ? handleMenu(e, '3') : null}>全部关闭</li>
-                    <li onClick={(e) => handleMenu ? handleMenu(e, '4') : null}>除此之外全部关闭</li>
+                    <li onClick={(e) => handleNode ? handleNode(e, '1') : null}>刷新当前</li>
+                    <li onClick={(e) => handleNode ? handleNode(e, '2') : null}>关闭当前</li>
+                    <li onClick={(e) => handleNode ? handleNode(e, '3') : null}>全部关闭</li>
+                    <li onClick={(e) => handleNode ? handleNode(e, '4') : null}>除此之外全部关闭</li>
                   </ul> : null
               }
             </span>
@@ -107,40 +107,27 @@ function mapStateToProps(state: any): HomeMainProps {
 
 function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
   return {
-    setCurrentNode(obj) {
+    selectNode(obj) {
       dispatch(actionCreators.selectNode(obj))
     },
-    delCurrentNode(e, id) {
+    deleteNode(e, id) {
       // 阻止合成事件的冒泡
       e.stopPropagation();
       // 阻止与原生事件的冒泡
       e.nativeEvent.stopImmediatePropagation();
       dispatch(actionCreators.deleteNode(id))
     },
-    switchFullscreen(flag) {
-      flag ? fullScreen() : fullExit();
-      dispatch(myAction.switchFullscreen(flag))
-    },
-    handleMenu(e, type) {
+    handleNode(e, handleType) {
       // 阻止合成事件的冒泡
       e.stopPropagation();
       // 阻止与原生事件的冒泡
       e.nativeEvent.stopImmediatePropagation();
-      switch (type) {
-        case '1':
-          console.log(type)
-          break;
-        case '2':
-          console.log(type)
-          break;
-        case '3':
-          console.log(type)
-          break;
-        case '4':
-          console.log(type)
-          break;
-      }
-    }
+      dispatch(actionCreators.handleNode(handleType))
+    },
+    switchFullscreen(flag) {
+      flag ? fullScreen() : fullExit();
+      dispatch(myAction.switchFullscreen(flag))
+    },
   }
 }
 

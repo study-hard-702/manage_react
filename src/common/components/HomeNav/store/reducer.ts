@@ -27,6 +27,8 @@ export default (state = defaultState, action: any) => {
         return item.id !== action.id
       })
       return state.set('navList', newNavList);
+    case constants.HANDLE_NODE:
+      return state;
     default:
       return state;
   }

@@ -20,4 +20,10 @@ export function deleteNode(id: any) {
   }
 }
 
+export function handleNode(handleType: any) {
+  return {
+    type: constants.HANDLE_NODE,
+    handleType: handleType
+  }
+}
 

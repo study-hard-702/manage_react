@@ -17,7 +17,6 @@ class Login extends BaseComponent<LoginProps, {}> {
 
   doRender(): React.ReactElement<{}> {
     const {login} = this.props;
-    console.log(this.state)
     return (
       <div className="Login">
         <div className="Login-main">

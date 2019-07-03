@@ -45,12 +45,11 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
           onSelect={(checkedKeys: any, e: any) => {
             const {node} = e;
             const {props} = node;
-            let obj = {
-              name: props.title,
-              id: checkedKeys[0]
-            }
-            if (selectNode && !props.children) {
-              selectNode(obj)
+            if (selectNode && checkedKeys[0] && !props.children) {
+              selectNode({
+                name: props.title,
+                id: parseInt(checkedKeys[0], 10)
+              })
             }
           }}>
           {this.renderTree(navTree)}

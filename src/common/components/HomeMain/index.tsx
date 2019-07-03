@@ -10,6 +10,7 @@ export interface HomeMainProps {
   navList?: any;
   currentNav?: any;
   fullScreenFlag?: boolean;
+  menuList?: any;
   selectNode?: (obj: any) => any;
   deleteNode?: (e: any, id: number) => any;
   handleNode?: (e: any, handleType: string) => any;
@@ -37,6 +38,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
       currentNav,
       navList,
       fullScreenFlag,
+      menuList,
       selectNode,
       deleteNode,
       handleNode,
@@ -80,11 +82,23 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
               页面操作 <i className="iconfont"></i>
               {
                 this.state.showMenu ?
-                  <ul>
-                    <li onClick={(e) => handleNode ? handleNode(e, '1') : null}>刷新当前</li>
-                    <li onClick={(e) => handleNode ? handleNode(e, '2') : null}>关闭当前</li>
-                    <li onClick={(e) => handleNode ? handleNode(e, '3') : null}>全部关闭</li>
-                    <li onClick={(e) => handleNode ? handleNode(e, '4') : null}>除此之外全部关闭</li>
+                  <ul>{
+                    menuList.map((item: any, index: number) => {
+                      return (
+                        <li key={1}
+                            onClick={(e) => {
+                              this.setState({
+                                showMenu: false
+                              })
+                              if (handleNode) {
+                                handleNode(e, item.id)
+                              }
+                            }}>
+                          {item.name}
+                        </li>
+                      )
+                    })
+                  }
                   </ul> : null
               }
             </span>
@@ -101,7 +115,13 @@ function mapStateToProps(state: any): HomeMainProps {
   return {
     navList: state.getIn(['homeNav', 'navList']),
     currentNav: state.getIn(['homeNav', 'currentNav']),
-    fullScreenFlag: state.getIn(['homeMain', 'fullScreenFlag'])
+    fullScreenFlag: state.getIn(['homeMain', 'fullScreenFlag']),
+    menuList: [
+      {id: 1, name: '刷新当前'},
+      {id: 2, name: '关闭当前'},
+      {id: 3, name: '全部关闭'},
+      {id: 4, name: '除此之外全部关闭'}
+    ]
   };
 }
 

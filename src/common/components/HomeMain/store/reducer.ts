@@ -6,7 +6,6 @@ const defaultState = fromJS({
 });
 
 export default (state = defaultState, action: any) => {
-  const navList = state.get('navList');
   switch (action.type) {
     case constants.SWITCH_FULLSCREEN:
       return state.set('fullScreenFlag', action.fullScreenFlag)

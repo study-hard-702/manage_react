@@ -8,11 +8,21 @@ import './style.less';
 export interface HeaderProps {
   loginStatus?: boolean;
   userName?: string;
+  logIn?: () => any;
   logout?: () => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Header extends BaseComponent<HeaderProps, {}> {
+  componentWillMount() {
+    const loginStatus = window.sessionStorage.getItem('loginStatus');
+    if (loginStatus && loginStatus === '1') {
+      if (this.props.logIn) {
+        this.props.logIn()
+      }
+    }
+  }
+
   doRender(): React.ReactElement<{}> {
     const {loginStatus, userName, logout} = this.props;
     return (
@@ -42,6 +52,9 @@ function mapStateToProps(state: any): HeaderProps {
 
 function mapDispatchToProps(dispatch: any, ownProps: any): HeaderProps {
   return {
+    logIn() {
+      dispatch(actionCreators.changeLoginStatus(true));
+    },
     logout() {
       dispatch(actionCreators.changeLoginStatus(false));
       window.sessionStorage.setItem('loginStatus', '2')

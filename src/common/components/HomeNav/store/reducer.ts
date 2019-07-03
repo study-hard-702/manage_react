@@ -26,7 +26,10 @@ export default (state = defaultState, action: any) => {
       const newNavList = navList.filter((item: any) => {
         return item.id !== action.id
       })
-      return state.set('navList', newNavList);
+      return state.merge({
+        navList: newNavList,
+        currentNav: newNavList.size >= 1 ? newNavList.get(newNavList.size - 1) : {}
+      })
     case constants.HANDLE_NODE:
       switch (action.handleType) {
         case 1:

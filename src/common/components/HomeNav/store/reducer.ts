@@ -43,7 +43,7 @@ export default (state = defaultState, action: any) => {
         case 3:
           return state.merge({
             currentNav: {},
-            navList: []
+            navList: fromJS([])
           });
           break;
         case 4:

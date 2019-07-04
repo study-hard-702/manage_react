@@ -29,23 +29,11 @@ export default (state = defaultState, action: any) => {
         navList: flag ? navList : navList.push(action.data)
       })
     case constants.DELETE_NODE:
-      const newNavList = navList.filter((item: any) => {
-        return item.id !== action.id
-      })
       return state.merge({
-        navList: newNavList,
-        currentNav: newNavList.size >= 1 ? newNavList.get(newNavList.size - 1) : {}
+        navList: action.newNavList,
+        currentNav: action.newCurrentNav
       })
     case constants.HANDLE_NODE:
-      if (action.handleType === 2) {
-        const NavList3 = navList.filter((item: any) => {
-          return item.id !== state.getIn(['currentNav', 'id'])
-        })
-        return state.merge({
-          navList: NavList3,
-          currentNav: NavList3.size >= 1 ? NavList3.get(NavList3.size - 1) : {}
-        })
-      }
       if (action.handleType === 3) {
         return state.merge({
           currentNav: {},

@@ -20,7 +20,7 @@ export interface HomeMainProps {
   fullScreenFlag?: boolean;
   menuList?: any;
   selectNode?: (obj: any) => any;
-  deleteNode?: (id: number) => any;
+  deleteNode?: (newNavList: any, newCurrentNav: any) => any;
   handleNode?: (handleType: string) => any;
   switchFullscreen?: (flag: boolean) => any;
 }
@@ -48,15 +48,24 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     })
   }
 
+  _deleteIndexNode(id: any) {
+    const {navList, deleteNode} = this.props;
+    const newNavList = navList.filter((newItem: any) => {
+      return newItem.id !== id
+    })
+    const newCurrentNav = newNavList.size >= 1 ? newNavList.get(newNavList.size - 1) : {};
+    if (deleteNode) {
+      deleteNode(newNavList, newCurrentNav)
+    }
+    gotoPath(`/home/${newCurrentNav.path}`)
+  }
+
   _deleteNode(e: any, item: any) {
     // 阻止合成事件的冒泡
     e.stopPropagation();
     // 阻止与原生事件的冒泡
     e.nativeEvent.stopImmediatePropagation();
-    const {deleteNode} = this.props;
-    if (deleteNode) {
-      deleteNode(item.id)
-    }
+    this._deleteIndexNode(item.id)
   }
 
   _selectNode(item: any) {
@@ -72,9 +81,12 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     e.stopPropagation();
     // 阻止与原生事件的冒泡
     e.nativeEvent.stopImmediatePropagation();
-    const {handleNode} = this.props;
+    const {currentNav, handleNode} = this.props;
     if (handleNode) {
       handleNode(item.id)
+    }
+    if (item.id == 2) {
+      this._deleteIndexNode(currentNav.id)
     }
     this._setShowMenu(false)
   }
@@ -170,8 +182,8 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
     selectNode(obj) {
       dispatch(actionCreators.selectNode(obj))
     },
-    deleteNode(id) {
-      dispatch(actionCreators.deleteNode(id))
+    deleteNode(newNavList, newCurrentNav) {
+      dispatch(actionCreators.deleteNode(newNavList, newCurrentNav))
     },
     handleNode(handleType) {
       dispatch(actionCreators.handleNode(handleType))

@@ -13,7 +13,7 @@ class ProductMy extends BaseComponent<ProductMyProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="ProductMy">
-        我是我的管理
+        我是我的产品
       </div>
     );
   }

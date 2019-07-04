@@ -27,10 +27,11 @@ export function selectNode(obj: any) {
   }
 }
 
-export function deleteNode(id: any) {
+export function deleteNode(newNavList: any, newCurrentNav: any) {
   return {
     type: constants.DELETE_NODE,
-    id: id
+    newNavList: newNavList,
+    newCurrentNav: newCurrentNav
   }
 }
 

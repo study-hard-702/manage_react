@@ -2,6 +2,9 @@ import * as React from "react";
 import {connect} from 'react-redux';
 import BaseComponent from "../../common/BaseComponent";
 import './style.less';
+import loadable from "../../utils/laodable"
+
+const QueryResult = loadable(() => import('../../common/components/QueryResult/index'))
 
 export interface ProductMyProps {
 
@@ -14,6 +17,7 @@ class ProductMy extends BaseComponent<ProductMyProps, {}> {
     return (
       <div className="ProductMy">
         我是我的产品
+        <QueryResult/>
       </div>
     );
   }

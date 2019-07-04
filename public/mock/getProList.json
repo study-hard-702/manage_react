@@ -1,0 +1,87 @@
+{
+  "status": "200",
+  "msg": "成功",
+  "timestamp": "1562223056182",
+  "data": {
+    "total": 1014,
+    "start": 1,
+    "end": 5,
+    "data": [
+      {
+        "product_key": "1b399a77247242f896b82602b0a43c6f",
+        "template_key": "b9e0bb3bfcba4654af20ba2f49afcd00",
+        "product_code": "EAJ_11129",
+        "product_name": "哈哈险",
+        "url": "http://m-testing.mypicc.com.cn/monitor/#/?productCode=EAJ_11129",
+        "status": "1",
+        "type": "1",
+        "version": "1",
+        "update_time": "2019-07-01 13:30:41",
+        "insert_time": "2019-07-01 13:30:26",
+        "platform": "1|2|3|4",
+        "comCode": "11000000",
+        "demand_number": "201815455-019"
+      },
+      {
+        "product_key": "ab9e2010cb144e56861635b0e1f90c9d",
+        "template_key": "704ba731478ddf9ae0500a0a0e346101",
+        "product_code": "EJQ_1103",
+        "product_name": "EJQ产品名称",
+        "url": "http://m-testing.mypicc.com.cn/monitor/#/?productCode=EJQ_1103",
+        "status": "3",
+        "type": "2",
+        "version": "1",
+        "update_time": "2019-06-28 16:14:25",
+        "insert_time": "2019-06-27 17:35:28",
+        "platform": "1|2|3|4",
+        "comCode": "11000000",
+        "demand_number": "201815455-019"
+      },
+      {
+        "product_key": "b4483bd1e8704398b0b313775c2e02d0",
+        "template_key": "6e7d657a2b7dfb3ae0500a0a0e343a2f",
+        "product_code": "LAI_1105",
+        "product_name": "lucy产品名称",
+        "url": "http://m-testing.mypicc.com.cn/monitor/#/?productCode=LAI_1105",
+        "status": "3",
+        "type": "2",
+        "version": "1",
+        "update_time": "2019-07-04 13:33:57",
+        "insert_time": "2019-06-27 14:38:36",
+        "platform": "1|2|3|4",
+        "comCode": "11000000",
+        "demand_number": "201815455-019"
+      },
+      {
+        "product_key": "c07e68789fb94c6dac95c3455d7f22ce",
+        "template_key": "6e7d657a2b7dfb3ae0500a0a0e343a2f",
+        "product_code": "ZDB_1109",
+        "product_name": "测试627",
+        "url": "http://m-testing.mypicc.com.cn/monitor/#/?productCode=ZDB_1109",
+        "status": "1",
+        "type": "6",
+        "version": "1",
+        "update_time": "2019-06-27 14:31:02",
+        "insert_time": "2019-06-27 14:30:23",
+        "platform": "1|2|3|4",
+        "comCode": "11000000",
+        "demand_number": "201815455-019"
+      },
+      {
+        "product_key": "0f380429220745cbb20c5dbcc586b25f",
+        "template_key": "704ba731478ddf9ae0500a0a0e346101",
+        "product_code": "ZJJ_1109",
+        "product_name": "基本信息-产品名称ZJJ",
+        "url": "http://m-testing.mypicc.com.cn/monitor/#/?productCode=ZJJ_1109",
+        "status": "1",
+        "type": "6",
+        "version": "1",
+        "update_time": "2019-06-26 14:46:08",
+        "insert_time": "2019-06-26 14:30:43",
+        "platform": "1|2|3|4",
+        "comCode": "11000000",
+        "demand_number": "201815455-019"
+      }
+    ]
+  }
+}

@@ -42,3 +42,16 @@ export function handleNode(handleType: any) {
   }
 }
 
+export function getProList() {
+  return {
+    type: constants.GET_PROLIST
+  }
+}
+
+export function setProList(data: any) {
+  return {
+    type: constants.SET_PROLIST,
+    data: data
+  }
+}
+

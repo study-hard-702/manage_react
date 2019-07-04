@@ -7,6 +7,7 @@ const defaultState = fromJS({
   navTree: [],
   navList: [],
   currentNav: {},
+  dataSource: [],
 });
 
 export default (state = defaultState, action: any) => {
@@ -53,6 +54,10 @@ export default (state = defaultState, action: any) => {
           return state;
         }
       }
+    case constants.SET_PROLIST:
+      return state.merge({
+        dataSource: action.data,
+      })
     default:
       return state;
   }

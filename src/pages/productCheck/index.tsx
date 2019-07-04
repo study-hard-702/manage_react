@@ -14,7 +14,7 @@ class ProductCheck extends BaseComponent<ProductCheckProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="ProductCheck">
-
+        我是审核管理
       </div>
     );
   }

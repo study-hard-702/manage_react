@@ -14,7 +14,7 @@ class WorkBench extends BaseComponent<WorkBenchProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="WorkBench">
-
+        我是工作台
       </div>
     );
   }

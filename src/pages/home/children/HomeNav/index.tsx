@@ -31,6 +31,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
           <TreeNode
             title={item.name}
             key={item.id}
+            path={item.path}
           >
             {this.renderTree(item.children)}
           </TreeNode>
@@ -48,14 +49,15 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
           onSelect={(checkedKeys: any, e: any) => {
             const {node} = e;
             const {props} = node;
+            console.log('props', props)
             if (selectNode && checkedKeys[0] && !props.children) {
               selectNode({
                 name: props.title,
                 id: parseInt(checkedKeys[0], 10)
               })
             }
-            if (checkedKeys[0] === '21') {
-              gotoPath('/myProduct');
+            if (props.path) {
+              gotoPath(`/home/${props.path}`);
             }
           }}>
           {this.renderTree(navTree)}

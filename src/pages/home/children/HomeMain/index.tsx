@@ -1,9 +1,17 @@
 import * as React from "react";
+import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import BaseComponent from "../../../../common/BaseComponent";
+import loadable from "../../../../utils/laodable"
 import {fullScreen, fullExit} from "../../../../utils/browser"
 import {actionCreators} from "../../store"
 import './style.less';
+
+const productMy = loadable(() => import('../../../productMy'))
+const productAdd = loadable(() => import('../../../productAdd'))
+const productAll = loadable(() => import('../../../productAll'))
+const productCheck = loadable(() => import('../../../productCheck'))
+const workBench = loadable(() => import('../../../workBench'))
 
 export interface HomeMainProps {
   navList?: any;
@@ -104,7 +112,12 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
             <span className="HomeMain-right-toRignt iconfont"></span>
           </div>
         </div>
-        {currentNav.name}
+        <Redirect to="/home/workBench"/>
+        <Route path='/home/productMy' exact component={productMy}/>
+        <Route path='/home/productAdd' exact component={productAdd}/>
+        <Route path='/home/productAll' exact component={productAll}/>
+        <Route path='/home/productCheck' exact component={productCheck}/>
+        <Route path='/home/workBench' exact component={workBench}/>
       </div>
     );
   }

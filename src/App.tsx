@@ -13,9 +13,8 @@ class App extends Component {
       <Suspense fallback={<PageLoading/>}>
         <Switch>
           <Route path="/" exact component={Login}/>
-          <PrivateRoute path='/login' exact component={Login}></PrivateRoute>
-          <PrivateRoute path='/home' exact component={Home} />
-          <PrivateRoute path='/myproduct' exact component={MyProduct} />
+          <PrivateRoute path='/login' exact component={Login}/>
+          <PrivateRoute path='/home' component={Home}/>
         </Switch>
       </Suspense>
     );

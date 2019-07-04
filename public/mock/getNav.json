@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "工作台",
+      "path": "workBench",
       "children": []
     },
     {
@@ -12,18 +13,21 @@
         {
           "id": 21,
           "name": "我的产品",
+          "path": "productMy",
           "parentId": 2,
           "children": []
         },
         {
           "id": 22,
           "name": "所有产品",
+          "path": "productAll",
           "parentId": 2,
           "children": []
         },
         {
           "id": 23,
           "name": "创建产品",
+          "path": "productAdd",
           "parentId": 2,
           "children": []
         }
@@ -32,6 +36,7 @@
     {
       "id": 3,
       "name": "审核管理",
+      "path": "productCheck",
       "children": []
     }
   ],

@@ -14,7 +14,7 @@ class ProductAll extends BaseComponent<ProductAllProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="ProductAll">
-
+        我是所有产品
       </div>
     );
   }

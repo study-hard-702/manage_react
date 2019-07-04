@@ -1,11 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {
-  CHANGE_LOGINSTATUS,
-  GET_NAV,
-  SET_NAV,
-  GET_PROLIST,
-  SET_PROLIST,
-} from '../../pages/home/store/constants';
+import {GET_PROLIST, SET_PROLIST} from '../../common/components/QueryResult/store/constants';
+import {CHANGE_LOGINSTATUS, GET_NAV, SET_NAV} from '../../pages/home/store/constants';
 import {CHANGE_LOGIN} from '../../pages/login/store/constants';
 import {
   fetchLogin,
@@ -71,7 +66,7 @@ function* getProList() {
   console.log('res', res)
   if (res.status === '200') {
     // dispatch 一个 action 到 reducer, payload 是请求返回的数据
-    let data: any = [];
+    let proList: any = [];
     let productStatus = ["", "初始", "待审核", "审核未通过", "已发布", "审核通过"];
     let productTypes = ["", "旅游保险", "意外保险", "行李保险", "家庭保险", "健康保险", "责任险"];
     res.data.data.forEach((item: any, index: number) => {
@@ -85,11 +80,17 @@ function* getProList() {
       obj.status = productStatus[item.status];
       obj.update_time = item.update_time;
       obj.handel = '修改 提交 审核';
-      data.push(obj)
+      proList.push(obj)
     })
+    let proListDesc: any = {
+      total: res.data.total,
+      start: res.data.start,
+      end: res.data.end,
+    }
     yield put({
       type: SET_PROLIST,
-      data: data,
+      proList: proList,
+      proListDesc: proListDesc
     })
   }
 }

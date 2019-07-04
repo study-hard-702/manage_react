@@ -5,5 +5,3 @@ export const SET_NAV = 'Home/SET_NAV';
 export const SELECT_NODE = 'Home/SELECT_NODE';
 export const DELETE_NODE = 'Home/DELETE_NODE';
 export const HANDLE_NODE = 'Home/HANDLE_NODE';
-export const GET_PROLIST = 'Home/GET_PROLIST';
-export const SET_PROLIST = 'Home/SET_PROLIST';

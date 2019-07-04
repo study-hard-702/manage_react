@@ -1,24 +1,36 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {Table, Divider, Tag} from 'antd';
-import BaseComponent from "../../BaseComponent";
+import BaseComponent from "../../BaseComponent"
+import {actionCreators} from "./store"
 import './style.less';
 
 export interface QueryResultProps {
-  dataSource?: any,
-  columns?: any
+  proList?: any,
+  proListDesc?: any,
+  columns?: any,
+  pagination?: any,
+  getProList?: () => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class QueryResult extends BaseComponent<QueryResultProps, {}> {
+  componentWillMount() {
+    const {getProList} = this.props;
+    if (getProList) {
+      getProList();
+    }
+  }
+
   doRender(): React.ReactElement<{}> {
-    const {dataSource, columns} = this.props;
+    const {proList, proListDesc, columns, pagination} = this.props;
     return (
       <div className="QueryResult">
         <Table
           bordered
-          dataSource={dataSource}
-          columns={columns}/>
+          dataSource={proList}
+          columns={columns}
+          pagination={pagination}/>
       </div>
     );
   }
@@ -26,7 +38,8 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
 
 function mapStateToProps(state: any): QueryResultProps {
   return {
-    dataSource: state.getIn(['home', 'dataSource']),
+    proList: state.getIn(['queryresult', 'proList']),
+    proListDesc: state.getIn(['queryresult', 'proListDesc']),
     columns: [
       {
         title: '序号',
@@ -83,11 +96,23 @@ function mapStateToProps(state: any): QueryResultProps {
         width: '131px'
       },
     ],
+    pagination: {
+      showQuickJumper: true,
+      defaultCurrent: 2,
+      total: 500,
+      onChange: (pageNumber: number) => {
+        console.log('Page: ', pageNumber);
+      }
+    }
   };
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: any): QueryResultProps {
-  return {}
+  return {
+    getProList() {
+      dispatch(actionCreators.getProList());
+    }
+  }
 }
 
 export default QueryResult;

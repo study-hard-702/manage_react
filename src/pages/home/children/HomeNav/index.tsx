@@ -11,7 +11,7 @@ const {TreeNode} = Tree;
 export interface HomeNavProps {
   navTree?: any;
   getNavTree?: () => any;
-  selectNode?: (obj: any) => any;
+  selectNode?: (props: any, id: string) => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -23,8 +23,17 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
     }
   }
 
-  renderTree(navTree: any) {
-    console.log(navTree, ';navTree')
+  _selectNode(props: any, id: string) {
+    const {selectNode} = this.props;
+    if (!props.children && id && selectNode) {
+      selectNode(props, id)
+    }
+    if (props.path) {
+      gotoPath(`/home/${props.path}`);
+    }
+  }
+
+  _renderTree(navTree: any) {
     if (navTree.length >= 1) {
       return navTree.map((item: any, index: number) => {
         return (
@@ -33,7 +42,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
             key={item.id}
             path={item.path}
           >
-            {this.renderTree(item.children)}
+            {this._renderTree(item.children)}
           </TreeNode>
         )
       })
@@ -41,7 +50,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
-    const {navTree, selectNode} = this.props;
+    const {navTree} = this.props;
     return (
       <div className="HomeNav">
         <Tree
@@ -49,19 +58,9 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
           onSelect={(checkedKeys: any, e: any) => {
             const {node} = e;
             const {props} = node;
-            console.log('props', props)
-            if (selectNode && checkedKeys[0] && !props.children) {
-              selectNode({
-                name: props.title,
-                path: props.path,
-                id: parseInt(checkedKeys[0], 10),
-              })
-            }
-            if (props.path) {
-              gotoPath(`/home/${props.path}`);
-            }
+            this._selectNode(props, checkedKeys[0])
           }}>
-          {this.renderTree(navTree)}
+          {this._renderTree(navTree)}
         </Tree>
       </div>
     );
@@ -79,9 +78,13 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeNavProps {
     getNavTree() {
       dispatch(actionCreators.getNav())
     },
-    selectNode(obj) {
-      dispatch(actionCreators.selectNode(obj))
-    },
+    selectNode(props, id) {
+      dispatch(actionCreators.selectNode({
+        name: props.title,
+        path: props.path,
+        id: parseInt(id, 10),
+      }))
+    }
   }
 }
 

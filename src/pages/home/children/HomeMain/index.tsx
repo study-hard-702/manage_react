@@ -20,8 +20,8 @@ export interface HomeMainProps {
   fullScreenFlag?: boolean;
   menuList?: any;
   selectNode?: (obj: any) => any;
-  deleteNode?: (e: any, id: number) => any;
-  handleNode?: (e: any, handleType: string) => any;
+  deleteNode?: (id: number) => any;
+  handleNode?: (handleType: string) => any;
   switchFullscreen?: (flag: boolean) => any;
 }
 
@@ -42,16 +42,57 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     }
   }
 
+  _setShowMenu(flag: boolean) {
+    this.setState({
+      showMenu: flag
+    })
+  }
+
+  _deleteNode(e: any, item: any) {
+    // 阻止合成事件的冒泡
+    e.stopPropagation();
+    // 阻止与原生事件的冒泡
+    e.nativeEvent.stopImmediatePropagation();
+    const {deleteNode} = this.props;
+    if (deleteNode) {
+      deleteNode(item.id)
+    }
+  }
+
+  _selectNode(item: any) {
+    const {selectNode} = this.props;
+    if (selectNode) {
+      selectNode(item)
+    }
+    gotoPath(`/home/${item.path}`);
+  }
+
+  _handleNode(e: any, item: any) {
+    // 阻止合成事件的冒泡
+    e.stopPropagation();
+    // 阻止与原生事件的冒泡
+    e.nativeEvent.stopImmediatePropagation();
+    const {handleNode} = this.props;
+    if (handleNode) {
+      handleNode(item.id)
+    }
+    this._setShowMenu(false)
+  }
+
+  _switchFullscreen(flag: boolean) {
+    const {switchFullscreen} = this.props;
+    if (switchFullscreen) {
+      switchFullscreen(flag)
+    }
+    flag ? fullScreen() : fullExit();
+  }
+
   doRender(): React.ReactElement<{}> {
     const {
       currentNav,
       navList,
       fullScreenFlag,
       menuList,
-      selectNode,
-      deleteNode,
-      handleNode,
-      switchFullscreen,
     } = this.props;
     return (
       <div className="HomeMain">
@@ -65,10 +106,10 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
                 return (
                   <li key={item.id}
                       className={item.id === currentNav.id ? 'HomeMain-currentNav' : ''}
-                      onClick={() => selectNode ? selectNode(item) : null}>
+                      onClick={() => this._selectNode(item)}>
                     {item.name}
                     <i className="HomeMain-navList-close iconfont"
-                       onClick={(e) => deleteNode ? deleteNode(e, item.id) : null}></i>
+                       onClick={(e) => this._deleteNode(e, item)}></i>
                   </li>
                 )
               })
@@ -76,33 +117,18 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
           </ul>
           <div className="HomeMain-right">
             <span className="HomeMain-right-qp iconfont"
-                  onClick={() => {
-                    if (switchFullscreen) {
-                      switchFullscreen(!fullScreenFlag)
-                    }
-                  }}>
+                  onClick={() => this._switchFullscreen(!fullScreenFlag)}>
             </span>
             <span className="HomeMain-right-menu"
-                  onClick={() => {
-                    this.setState({
-                      showMenu: !this.state.showMenu
-                    })
-                  }}>
+                  onClick={() => this._setShowMenu(!this.state.showMenu)}>
               页面操作 <i className="iconfont"></i>
               {
                 this.state.showMenu ?
                   <ul>{
                     menuList.map((item: any, index: number) => {
                       return (
-                        <li key={1}
-                            onClick={(e) => {
-                              this.setState({
-                                showMenu: false
-                              })
-                              if (handleNode) {
-                                handleNode(e, item.id)
-                              }
-                            }}>
+                        <li key={index}
+                            onClick={(e) => this._handleNode(e, item)}>
                           {item.name}
                         </li>
                       )
@@ -143,24 +169,14 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
   return {
     selectNode(obj) {
       dispatch(actionCreators.selectNode(obj))
-      gotoPath(`/home/${obj.path}`);
     },
-    deleteNode(e, id) {
-      // 阻止合成事件的冒泡
-      e.stopPropagation();
-      // 阻止与原生事件的冒泡
-      e.nativeEvent.stopImmediatePropagation();
+    deleteNode(id) {
       dispatch(actionCreators.deleteNode(id))
     },
-    handleNode(e, handleType) {
-      // 阻止合成事件的冒泡
-      e.stopPropagation();
-      // 阻止与原生事件的冒泡
-      e.nativeEvent.stopImmediatePropagation();
+    handleNode(handleType) {
       dispatch(actionCreators.handleNode(handleType))
     },
     switchFullscreen(flag) {
-      flag ? fullScreen() : fullExit();
       dispatch(actionCreators.switchFullscreen(flag))
     },
   }

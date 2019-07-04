@@ -23,6 +23,15 @@ class HomeHeader extends BaseComponent<HomeHeaderProps, {}> {
     }
   }
 
+  _logout() {
+    const {logout} = this.props;
+    if (logout) {
+      logout()
+    }
+    window.sessionStorage.setItem('loginStatus', '2')
+    gotoPath('/login')
+  }
+
   doRender(): React.ReactElement<{}> {
     const {loginStatus, userName, logout} = this.props;
     return (
@@ -34,7 +43,7 @@ class HomeHeader extends BaseComponent<HomeHeaderProps, {}> {
         <ul className="HomeHeader-menu">
           <li className="HomeHeader-menu-userName iconfont">{userName}</li>
           <li className="HomeHeader-menu-logout iconfont"
-              onClick={() => logout ? logout() : null}>
+              onClick={() => this._logout()}>
             {loginStatus ? '退出' : '登陆'}
           </li>
         </ul>
@@ -57,8 +66,6 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeHeaderProps {
     },
     logout() {
       dispatch(actionCreators.changeLoginStatus(false));
-      window.sessionStorage.setItem('loginStatus', '2')
-      gotoPath('/login')
       // ownProps.history.push('')
     }
   }

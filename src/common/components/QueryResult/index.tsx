@@ -1,15 +1,16 @@
 import * as React from "react";
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {Table, Divider, Tag} from 'antd';
 import BaseComponent from "../../BaseComponent"
 import {actionCreators} from "./store"
 import './style.less';
 
 export interface QueryResultProps {
-  proList?: any,
   proListDesc?: any,
   columns?: any,
   pagination?: any,
+  proList?: () => any;
   getProList?: () => any;
 }
 
@@ -23,12 +24,12 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
-    const {proList, proListDesc, columns, pagination} = this.props;
+    const {proList, columns, pagination} = this.props;
     return (
       <div className="QueryResult">
         <Table
           bordered
-          dataSource={proList}
+          dataSource={proList ? proList() : null}
           columns={columns}
           pagination={pagination}/>
       </div>
@@ -38,7 +39,20 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
 
 function mapStateToProps(state: any): QueryResultProps {
   return {
-    proList: state.getIn(['queryresult', 'proList']),
+    proList: () => {
+      const proList = state.getIn(['queryresult', 'proList']);
+      console.log('proList', proList)
+      proList.map((item: any) => {
+        item.handel = (
+          <span>
+              <a href="javascript:;">修改 </a>
+              <a href="javascript:;">提交 </a>
+              <Link to="/home/productCheck">审核</Link>
+            </span>
+        )
+      })
+      return proList;
+    },
     proListDesc: state.getIn(['queryresult', 'proListDesc']),
     columns: [
       {

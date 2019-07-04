@@ -1,6 +1,9 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {CHANGE_LOGINSTATUS} from '../../common/Header/store/constants';
-import {GET_NAV, SET_NAV} from '../../common/components/HomeNav/store/constants';
+import {
+  CHANGE_LOGINSTATUS,
+  GET_NAV,
+  SET_NAV
+} from '../../pages/home/store/constants';
 import {CHANGE_LOGIN} from '../../pages/login/store/constants';
 
 import {gotoPath} from '../../utils/history';

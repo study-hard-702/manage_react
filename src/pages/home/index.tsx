@@ -4,9 +4,9 @@ import loadable from "../../utils/laodable"
 import BaseComponent from "../../common/BaseComponent";
 import './style.less';
 
-const Header = loadable(() => import('../../common/Header/index'))
-const HomeNav = loadable(() => import('../../common/components/HomeNav/index'))
-const HomeMain = loadable(() => import('../../common/components/HomeMain/index'))
+const Header = loadable(() => import('./children/HomeHeader/index'))
+const HomeNav = loadable(() => import('./children/HomeNav/index'))
+const HomeMain = loadable(() => import('./children/HomeMain/index'))
 
 export interface HomeProps {
   pageName?: string;

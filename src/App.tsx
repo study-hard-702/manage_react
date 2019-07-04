@@ -16,7 +16,6 @@ class App extends Component {
           <PrivateRoute path='/login' exact component={Login}></PrivateRoute>
           <PrivateRoute path='/home' exact component={Home} />
           <PrivateRoute path='/myproduct' exact component={MyProduct} />
-          {/* <PrivateRoute path='/product' exact component={Home} /> */}
         </Switch>
       </Suspense>
     );

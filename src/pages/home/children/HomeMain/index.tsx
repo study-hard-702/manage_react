@@ -1,10 +1,9 @@
 import * as React from "react";
 import {connect} from 'react-redux';
-import BaseComponent from "../../BaseComponent";
+import BaseComponent from "../../../../common/BaseComponent";
+import {fullScreen, fullExit} from "../../../../utils/browser"
+import {actionCreators} from "../../store"
 import './style.less';
-import {actionCreators as myAction} from "./store"
-import {actionCreators} from "../HomeNav/store"
-import {fullScreen, fullExit} from "../../../utils/browser"
 
 export interface HomeMainProps {
   navList?: any;
@@ -44,7 +43,6 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
       handleNode,
       switchFullscreen,
     } = this.props;
-    // console.log(menuList, 'navList')
     return (
       <div className="HomeMain">
         <div className="HomeMain-nav">
@@ -114,9 +112,9 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
 
 function mapStateToProps(state: any): HomeMainProps {
   return {
-    navList: state.getIn(['homeNav', 'navList']),
-    currentNav: state.getIn(['homeNav', 'currentNav']),
-    fullScreenFlag: state.getIn(['homeMain', 'fullScreenFlag']),
+    navList: state.getIn(['home', 'navList']),
+    currentNav: state.getIn(['home', 'currentNav']),
+    fullScreenFlag: state.getIn(['home', 'fullScreenFlag']),
     menuList: [
       {id: 1, name: '刷新当前'},
       {id: 2, name: '关闭当前'},
@@ -147,7 +145,7 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
     },
     switchFullscreen(flag) {
       flag ? fullScreen() : fullExit();
-      dispatch(myAction.switchFullscreen(flag))
+      dispatch(actionCreators.switchFullscreen(flag))
     },
   }
 }

@@ -1,1 +1,0 @@
-export const SWITCH_FULLSCREEN = 'HomeMain/SWITCH_FULLSCREEN';

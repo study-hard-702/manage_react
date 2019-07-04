@@ -1,1 +1,0 @@
-export const CHANGE_LOGINSTATUS = 'Header/CHANGE_LOGINSTATUS';

@@ -1,11 +1,11 @@
 import * as React from "react";
 import {connect} from 'react-redux';
-import {actionCreators} from './store';
-import BaseComponent from "../BaseComponent";
-import {gotoPath} from '../../utils/history';
+import BaseComponent from "../../../../common/BaseComponent";
+import {gotoPath} from '../../../../utils/history';
+import {actionCreators} from '../../store';
 import './style.less';
 
-export interface HeaderProps {
+export interface HomeHeaderProps {
   loginStatus?: boolean;
   userName?: string;
   logIn?: () => any;
@@ -13,7 +13,7 @@ export interface HeaderProps {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-class Header extends BaseComponent<HeaderProps, {}> {
+class HomeHeader extends BaseComponent<HomeHeaderProps, {}> {
   componentWillMount() {
     const loginStatus = window.sessionStorage.getItem('loginStatus');
     if (loginStatus && loginStatus === '1') {
@@ -26,14 +26,14 @@ class Header extends BaseComponent<HeaderProps, {}> {
   doRender(): React.ReactElement<{}> {
     const {loginStatus, userName, logout} = this.props;
     return (
-      <div className="Header">
-        <div className="Header-logo">
-          <img src={require('../../statics/logo.png')} alt=''/>
-          <span className="Header-logo-text">管理后台</span>
+      <div className="HomeHeader">
+        <div className="HomeHeader-logo">
+          <img src={require('../../../../statics/logo.png')} alt=''/>
+          <span className="HomeHeader-logo-text">管理后台</span>
         </div>
-        <ul className="Header-menu">
-          <li className="Header-menu-userName iconfont">{userName}</li>
-          <li className="Header-menu-logout iconfont"
+        <ul className="HomeHeader-menu">
+          <li className="HomeHeader-menu-userName iconfont">{userName}</li>
+          <li className="HomeHeader-menu-logout iconfont"
               onClick={() => logout ? logout() : null}>
             {loginStatus ? '退出' : '登陆'}
           </li>
@@ -43,14 +43,14 @@ class Header extends BaseComponent<HeaderProps, {}> {
   }
 }
 
-function mapStateToProps(state: any): HeaderProps {
+function mapStateToProps(state: any): HomeHeaderProps {
   return {
-    loginStatus: state.getIn(['header', 'loginStatus']),
+    loginStatus: state.getIn(['home', 'loginStatus']),
     userName: 'root',
   };
 }
 
-function mapDispatchToProps(dispatch: any, ownProps: any): HeaderProps {
+function mapDispatchToProps(dispatch: any, ownProps: any): HomeHeaderProps {
   return {
     logIn() {
       dispatch(actionCreators.changeLoginStatus(true));
@@ -64,4 +64,4 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HeaderProps {
   }
 }
 
-export default Header;
+export default HomeHeader;

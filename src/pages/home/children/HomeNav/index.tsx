@@ -1,10 +1,10 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {Tree} from 'antd';
-import {actionCreators} from './store';
-import BaseComponent from "../../BaseComponent";
+import BaseComponent from "../../../../common/BaseComponent";
+import {gotoPath} from "../../../../utils/history";
+import {actionCreators} from '../../store/index';
 import './style.less';
-import { gotoPath } from "../../../utils/history";
 
 const {TreeNode} = Tree;
 
@@ -57,7 +57,6 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
             if (checkedKeys[0] === '21') {
               gotoPath('/myProduct');
             }
-            // console.log(checkedKeys, 'checkedKeys')
           }}>
           {this.renderTree(navTree)}
         </Tree>
@@ -68,7 +67,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
 
 function mapStateToProps(state: any): HomeNavProps {
   return {
-    navTree: state.getIn(['homeNav', 'navTree']),
+    navTree: state.getIn(['home', 'navTree']),
   };
 }
 

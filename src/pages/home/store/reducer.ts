@@ -2,6 +2,8 @@ import * as constants from './constants';
 import {fromJS} from "immutable"
 
 const defaultState = fromJS({
+  loginStatus: false,
+  fullScreenFlag: false,
   navTree: [],
   navList: [],
   currentNav: {},
@@ -10,6 +12,10 @@ const defaultState = fromJS({
 export default (state = defaultState, action: any) => {
   const navList = state.get('navList');
   switch (action.type) {
+    case constants.CHANGE_LOGINSTATUS:
+      return state.set('loginStatus', action.loginStatus);
+    case constants.SWITCH_FULLSCREEN:
+      return state.set('fullScreenFlag', action.fullScreenFlag)
     case constants.SET_NAV:
       return state.merge({
         navTree: action.data,

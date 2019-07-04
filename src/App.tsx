@@ -4,7 +4,6 @@ import PrivateRoute from './common/PrivateRoute';
 import PageLoading from './common/PageLoading';
 
 const Home = lazy(() => import('./pages/home/index'))
-const MyProduct = lazy(() => import('./pages/productMy/index'))
 const Login = lazy(() => import('./pages/login/index'))
 
 class App extends Component {

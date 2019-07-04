@@ -1,6 +1,5 @@
 import * as React from "react";
 import {connect} from 'react-redux';
-import {Tree} from 'antd';
 import BaseComponent from "../../common/BaseComponent";
 import './style.less';
 

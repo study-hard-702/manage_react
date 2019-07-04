@@ -33,7 +33,7 @@ class HomeHeader extends BaseComponent<HomeHeaderProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
-    const {loginStatus, userName, logout} = this.props;
+    const {loginStatus, userName} = this.props;
     return (
       <div className="HomeHeader">
         <div className="HomeHeader-logo">

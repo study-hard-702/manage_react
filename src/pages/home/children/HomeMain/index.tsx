@@ -3,6 +3,7 @@ import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import BaseComponent from "../../../../common/BaseComponent";
 import loadable from "../../../../utils/laodable"
+import {gotoPath} from "../../../../utils/history";
 import {fullScreen, fullExit} from "../../../../utils/browser"
 import {actionCreators} from "../../store"
 import './style.less';
@@ -35,6 +36,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     if (selectNode) {
       selectNode({
         name: "工作台",
+        path: "workBench",
         id: 1,
       })
     }
@@ -141,6 +143,7 @@ function mapDispatchToProps(dispatch: any, ownProps: any): HomeMainProps {
   return {
     selectNode(obj) {
       dispatch(actionCreators.selectNode(obj))
+      gotoPath(`/home/${obj.path}`);
     },
     deleteNode(e, id) {
       // 阻止合成事件的冒泡

@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, compose, Store, Middleware} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import {createLogger} from "redux-logger";
 import {persistStore, autoRehydrate} from 'redux-persist-immutable'

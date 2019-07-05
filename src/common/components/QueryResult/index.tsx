@@ -17,7 +17,7 @@ export interface QueryResultProps {
 class QueryResult extends BaseComponent<QueryResultProps, {}> {
   _filterProList() {
     const {keyTyle, proList} = this.props;
-    proList.map((item: any) => {
+    proList.forEach((item: any):any => {
       item.handel = (
         <span>
           {(keyTyle === 'ProductAll' || keyTyle === 'ProductMy') ?

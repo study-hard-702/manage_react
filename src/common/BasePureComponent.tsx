@@ -9,6 +9,7 @@ abstract class BasePureComponent<P, S> extends PureComponent<P, S> {
       this.logError(error);
       result = null;
     }
+    return result;
   }
   abstract doRender(): ReactElement<{}>;
 

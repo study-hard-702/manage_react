@@ -4,9 +4,10 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router/immutable';
 import App from './App';
 import history from './utils/history';
-import store from "./store/index"
-
+import {configureStore} from "./store/index"
 import './style/index.less';
+
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>

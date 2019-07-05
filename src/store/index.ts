@@ -1,23 +1,29 @@
-import {createStore, applyMiddleware, compose} from 'redux'
+import {createStore, applyMiddleware, compose, Store, Middleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import {createLogger} from "redux-logger";
 import {persistStore, autoRehydrate} from 'redux-persist-immutable'
 import rootSaga from './saga/index';
 import reducer from './reducer';
 
-const sagaMiddleware = createSagaMiddleware();
+export function configureStore(initialState?: any): any {
+  const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+  const middlewares: any[] = [
+    sagaMiddleware,
+    createLogger(),
+  ];
 
-const store = createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(sagaMiddleware),
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+
+  const store = createStore(reducer, initialState, composeEnhancers(
     autoRehydrate(),
-  )
-);
-persistStore(store)
+    applyMiddleware(...middlewares),
+  ));
 
-// 用于 applyMiddleware 阶段之后执行 Sagas，返回一个 Task 描述对象。
-sagaMiddleware.run(rootSaga);
+  persistStore(store)
 
-export default store;
+  // 用于 applyMiddleware 阶段之后执行 Sagas，返回一个 Task 描述对象。
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+}

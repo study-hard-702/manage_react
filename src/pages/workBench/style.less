@@ -1,3 +1,88 @@
 .WorkBench {
-
+  width: 100%;
+  padding: 40px 50px;
+  &-toDo {
+    &-title {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    &-list {
+      margin-top: 20px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      .toDo-item {
+        width: 30%;
+        height: 128px;
+        float: left;
+        margin-right: 30px;
+        padding: 27px 0 27px 27px;
+        box-sizing: border-box;
+        border: 1px solid #e3eaf0;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          background: #edf6fb;
+        }
+        &-img {
+          width: 72px;
+          height: 72px;
+          float: left;
+          border-radius: 50%;
+          background: #90badb;
+          img {
+            margin-left: 12px;
+            margin-top: 12px;
+          }
+        }
+        &-text {
+          height: 72px;
+          float: left;
+          margin-left: 20px;
+          .audit-text {
+            font-size: 14px;
+          }
+          .audit-num {
+            line-height: 50px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #f4b162;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+  &-shortcut {
+    &-title {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    &-list {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      .shortcut-item {
+        width: 22%;
+        height: 150px;
+        float: left;
+        margin-right: 30px;
+        box-sizing: border-box;
+        border: 1px solid #e3eaf0;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        &:hover {
+          background: #edf6fb;
+        }
+        img {
+          margin-left: 12px;
+          margin-top: 12px;
+        }
+        .shortcut-text {
+          margin-top: 10px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }

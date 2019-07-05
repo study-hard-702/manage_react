@@ -55,7 +55,6 @@ export default (state = defaultState, action: any) => {
           return state;
         }
       }
-      break;
     default:
       return state;
   }

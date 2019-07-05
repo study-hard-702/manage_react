@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Table, Divider, Tag} from 'antd';
+import {Table} from 'antd';
 import BaseComponent from "../../BaseComponent"
 import './style.less';
 

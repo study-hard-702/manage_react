@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Redirect, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import BaseComponent from "../../../../common/BaseComponent";
 import loadable from "../../../../utils/laodable"
@@ -85,7 +85,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     if (handleNode) {
       handleNode(item.id)
     }
-    if (item.id == 2) {
+    if (parseInt(item.id) === 2) {
       this._deleteIndexNode(currentNav.id)
     }
     this._setShowMenu(false)

@@ -13,7 +13,7 @@ export interface ProductAllProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class ProductAll extends BaseComponent<ProductAllProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const {getProList} = this.props;
     if (getProList) {
       getProList({

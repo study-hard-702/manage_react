@@ -16,7 +16,7 @@ export interface HomeNavProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class HomeNav extends BaseComponent<HomeNavProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const {getNavTree} = this.props;
     if (getNavTree) {
       getNavTree();

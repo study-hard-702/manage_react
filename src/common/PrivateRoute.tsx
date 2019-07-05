@@ -13,7 +13,7 @@ export interface PrivateRouteProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class PrivateRoute extends BaseComponent<PrivateRouteProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const loginStatus = window.sessionStorage.getItem('loginStatus');
     if (!loginStatus || loginStatus === '2') {
       gotoPath('/login')

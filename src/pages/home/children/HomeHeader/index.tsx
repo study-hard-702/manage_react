@@ -14,7 +14,7 @@ export interface HomeHeaderProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class HomeHeader extends BaseComponent<HomeHeaderProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const loginStatus = window.sessionStorage.getItem('loginStatus');
     if (loginStatus && loginStatus === '1') {
       if (this.props.logIn) {

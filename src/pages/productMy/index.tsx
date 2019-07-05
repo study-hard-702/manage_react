@@ -14,7 +14,7 @@ export interface ProductMyProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class ProductMy extends BaseComponent<ProductMyProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const {getProList} = this.props;
     if (getProList) {
       getProList({

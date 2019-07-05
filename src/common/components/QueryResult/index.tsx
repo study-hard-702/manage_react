@@ -50,6 +50,7 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
       <div className="QueryResult">
         <Table
           bordered
+          rowKey="num"
           dataSource={this._filterProList()}
           columns={this._filterColumns()}
           pagination={pagination}/>

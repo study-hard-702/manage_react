@@ -16,8 +16,8 @@ export function configureStore(initialState?: any): any {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
   const store = createStore(reducer, initialState, composeEnhancers(
-    autoRehydrate(),
     applyMiddleware(...middlewares),
+    autoRehydrate(),
   ));
 
   persistStore(store)

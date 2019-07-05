@@ -13,7 +13,7 @@ export interface ProductCheckProps {
 
 @connect(mapStateToProps, mapDispatchToProps)
 class ProductCheck extends BaseComponent<ProductCheckProps, {}> {
-  componentWillMount() {
+  componentDidMount() {
     const {getProList} = this.props;
     if (getProList) {
       getProList({

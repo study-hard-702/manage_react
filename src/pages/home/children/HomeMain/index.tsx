@@ -31,7 +31,7 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
     showMenu: false
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const pathname = history.location.pathname;
     if (pathname === '/home') {
       this._selectNode({

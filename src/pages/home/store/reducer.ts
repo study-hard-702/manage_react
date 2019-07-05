@@ -7,6 +7,8 @@ const defaultState = fromJS({
   navTree: [],
   navList: [],
   currentNav: {},
+  dataSource: [],
+  proListDesc: {},
 });
 
 export default (state = defaultState, action: any) => {

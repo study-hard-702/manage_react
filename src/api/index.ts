@@ -14,3 +14,9 @@ export const fetchGetNav = fetch({
   url: `${BASE_PATH}/getNav.json`,
   method: 'post',
 });
+
+// 获取产品
+export const fetchGetProList = fetch({
+  url: `${BASE_PATH}/getProList.json`,
+  method: 'post',
+});

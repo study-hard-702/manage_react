@@ -1,7 +1,9 @@
 import * as constants from './constants';
-export function getProList() {
+
+export function getProList(data: any) {
   return {
-    type: constants.GET_PROLIST
+    type: constants.GET_PROLIST,
+    data: data,
   }
 }
 

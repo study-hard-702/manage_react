@@ -3,56 +3,65 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Table, Divider, Tag} from 'antd';
 import BaseComponent from "../../BaseComponent"
-import {actionCreators} from "./store"
 import './style.less';
 
 export interface QueryResultProps {
+  keyTyle?: string,
+  proList?: any;
   proListDesc?: any,
   columns?: any,
   pagination?: any,
-  proList?: () => any;
-  getProList?: () => any;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class QueryResult extends BaseComponent<QueryResultProps, {}> {
-  componentWillMount() {
-    const {getProList} = this.props;
-    if (getProList) {
-      getProList();
-    }
+  _filterProList() {
+    const {keyTyle, proList} = this.props;
+    proList.map((item: any) => {
+      item.handel = (
+        <span>
+          {(keyTyle === 'ProductAll' || keyTyle === 'ProductMy') ?
+            <Link to="/home/productAdd">修改 </Link> : null}
+          {(keyTyle === 'ProductMy') ?
+            <Link to="/home/productAdd">复制 </Link> : null}
+          {(keyTyle === 'ProductCheck' || keyTyle === 'ProductMy') ?
+            <Link to="/home/productCheck">审核</Link> : null}
+        </span>
+      )
+    })
+    return proList;
+  }
+
+  _filterColumns() {
+    const {keyTyle, columns} = this.props;
+    const newColumns = columns.filter((item: any) => {
+      if (keyTyle === 'ProductCheck') {
+        return item.key !== 'update_time'
+      } else {
+        return true
+      }
+    })
+    return newColumns;
   }
 
   doRender(): React.ReactElement<{}> {
-    const {proList, columns, pagination} = this.props;
+    const {pagination} = this.props;
     return (
       <div className="QueryResult">
         <Table
           bordered
-          dataSource={proList ? proList() : null}
-          columns={columns}
+          dataSource={this._filterProList()}
+          columns={this._filterColumns()}
           pagination={pagination}/>
       </div>
     );
   }
 }
 
-function mapStateToProps(state: any): QueryResultProps {
+function mapStateToProps(state: any, ownProps: any): QueryResultProps {
   return {
-    proList: () => {
-      const proList = state.getIn(['queryresult', 'proList']);
-      console.log('proList', proList)
-      proList.map((item: any) => {
-        item.handel = (
-          <span>
-              <a href="javascript:;">修改 </a>
-              <a href="javascript:;">提交 </a>
-              <Link to="/home/productCheck">审核</Link>
-            </span>
-        )
-      })
-      return proList;
-    },
+    keyTyle: ownProps.keyTyle,
+    proList: state.getIn(['queryresult', 'proList']),
     proListDesc: state.getIn(['queryresult', 'proListDesc']),
     columns: [
       {
@@ -122,11 +131,7 @@ function mapStateToProps(state: any): QueryResultProps {
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: any): QueryResultProps {
-  return {
-    getProList() {
-      dispatch(actionCreators.getProList());
-    }
-  }
+  return {}
 }
 
 export default QueryResult;

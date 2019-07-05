@@ -54,7 +54,8 @@ function* getNav() {
   }
 }
 
-function* getProList() {
+function* getProList(action: any) {
+  const keyTyle = action.data.keyTyle;
   const myFetch = function () {
     return fetchGetProList({}).then((res) => {
       const result = res.data
@@ -78,7 +79,9 @@ function* getProList() {
       obj.demand_number = item.demand_number;
       obj.url = item.url;
       obj.status = productStatus[item.status];
-      obj.update_time = item.update_time;
+      if (keyTyle !== 'ProductCheck') {
+        obj.update_time = item.update_time;
+      }
       obj.handel = '修改 提交 审核';
       proList.push(obj)
     })

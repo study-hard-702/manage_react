@@ -3,7 +3,7 @@ import {Redirect, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import BaseComponent from "../../../../common/BaseComponent";
 import loadable from "../../../../utils/laodable"
-import {gotoPath} from "../../../../utils/history";
+import {history, gotoPath} from "../../../../utils/history";
 import {fullScreen, fullExit} from "../../../../utils/browser"
 import {actionCreators} from "../../store"
 import './style.less';
@@ -32,9 +32,9 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
   }
 
   componentWillMount() {
-    const {selectNode} = this.props;
-    if (selectNode) {
-      selectNode({
+    const pathname = history.location.pathname;
+    if (pathname === '/home') {
+      this._selectNode({
         name: "工作台",
         path: "workBench",
         id: 1,
@@ -152,7 +152,6 @@ class HomeMain extends BaseComponent<HomeMainProps, {}> {
             <span className="HomeMain-right-toRignt iconfont"></span>
           </div>
         </div>
-        <Redirect to="/home/workBench"/>
         <Route path='/home/productMy' exact component={productMy}/>
         <Route path='/home/productAdd' exact component={productAdd}/>
         <Route path='/home/productAll' exact component={productAll}/>

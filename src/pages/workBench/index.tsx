@@ -17,16 +17,33 @@ class WorkBench extends BaseComponent<WorkBenchProps, {}> {
   // 跳转对应路由
   goRoute(path: string) {
     const {navTree} = this.props;
-    let filterRoute: any = {};
-    navTree.map((item: any) => {
-      if (item.children && item.children.length > 0) {
-        filterRoute = item.children.find((itemSon: any) => itemSon.path === path)
-      } else {
-        filterRoute = item.path === path ? item : {}
+    const targetObj: any = this.filterRouteFun(navTree, path);
+    this._selectNode(targetObj, targetObj.id)
+  }
+
+  // 树级递归过滤出目标对象
+  filterRouteFun(arr: any, path: string) {
+    let targetObj = new Object();
+    var getTickMenuId = function (obj: any, path: string) {
+      if (undefined == obj || null == obj || !(obj instanceof Object)) {
+        return;
       }
-      return filterRoute
-    })
-    this._selectNode(filterRoute, filterRoute.id)
+      if (obj.path && obj.path == path) {
+        targetObj = Object.assign({}, obj)
+      }
+      if (null != obj.children && obj.children instanceof Array) {
+        for (let child of obj.children) {
+          getTickMenuId(child, path);
+        }
+      }
+    }
+    if (!(arr instanceof Array)) {
+      return false;
+    }
+    for (let rootMenu of arr) {
+      getTickMenuId(rootMenu, path);
+    }
+    return targetObj;
   }
 
   // 从navList选中对应的节点

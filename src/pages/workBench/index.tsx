@@ -17,12 +17,12 @@ class WorkBench extends BaseComponent<WorkBenchProps, {}> {
   // 跳转对应路由
   goRoute(path: string) {
     const {navTree} = this.props;
-    const targetObj: any = this.filterRouteFun(navTree, path);
+    const targetObj: any = this._filterRouteFun(navTree, path);
     this._selectNode(targetObj, targetObj.id)
   }
 
   // 树级递归过滤出目标对象
-  filterRouteFun(arr: any, path: string) {
+  _filterRouteFun(arr: any, path: string) {
     let targetObj = new Object();
     var getTickMenuId = function (obj: any, path: string) {
       if (undefined == obj || null == obj || !(obj instanceof Object)) {

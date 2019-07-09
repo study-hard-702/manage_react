@@ -1,3 +1,28 @@
 .QueryForm {
-
+  padding: 0 20px;
+  &-title {
+    font-size:14px;
+    font-weight: 800;
+    padding: 10px 0;
+    border-bottom:1px solid #ddd;
+  }
+  li {
+    float: left;
+    padding: 10px;
+    height:52px;
+    line-height: 32px;
+    width: 50%;
+    label {
+      display: inline-block;
+      width: 150px;
+      text-align: right;
+    }
+    .entry-box {
+      width: calc(100% - 200px)
+    }
+    &.li-last {
+      width: 100%;
+      text-align: center;
+    }
+  }
 }

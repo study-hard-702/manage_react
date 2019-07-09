@@ -6,7 +6,8 @@ import {actionCreators} from "../../common/components/QueryResult/store"
 import './style.less';
 
 
-const QueryResult = loadable(() => import('../../common/components/QueryResult/index'))
+const QueryResult = loadable(() => import('../../common/components/QueryResult/index'));
+const QueryForm = loadable(() => import('../../common/components/QueryForm/index'));
 
 export interface ProductMyProps {
   getProList?: (data?: any) => any;
@@ -26,7 +27,7 @@ class ProductMy extends BaseComponent<ProductMyProps, {}> {
   doRender(): React.ReactElement<{}> {
     return (
       <div className="ProductMy">
-        我是我的产品
+        <QueryForm title="我的产品"/>
         <QueryResult keyTyle="ProductMy"/>
       </div>
     );

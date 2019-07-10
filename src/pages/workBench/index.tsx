@@ -23,12 +23,12 @@ class WorkBench extends BaseComponent<WorkBenchProps, {}> {
 
   // 树级递归过滤出目标对象
   _filterRouteFun(arr: any, path: string) {
-    let targetObj = new Object();
+    let targetObj: any = {};
     var getTickMenuId = function (obj: any, path: string) {
-      if (undefined == obj || null == obj || !(obj instanceof Object)) {
+      if (undefined === obj || null === obj || !(obj instanceof Object)) {
         return;
       }
-      if (obj.path && obj.path == path) {
+      if (obj.path && obj.path === path) {
         targetObj = Object.assign({}, obj)
       }
       if (null != obj.children && obj.children instanceof Array) {

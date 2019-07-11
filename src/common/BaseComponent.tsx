@@ -16,8 +16,8 @@ abstract class BaseComponent<P, S> extends React.Component<P, S> {
   abstract doRender(): React.ReactElement<{}>;
 
   logError(error: Error): void {
-    const componentName: string = (this as any)._reactInternalInstance._currentElement.type.name;
-    const componentDetail: string = (this as any)._reactInternalInstance._currentElement.type.toString();
+    const componentName: string = (this as any)._reactInternalFiber.type.name;
+    const componentDetail: string = (this as any)._reactInternalFiber.type.toString();
     let propsString = "";
     for (let propName in this.props) {
       propsString += " " + propName;

@@ -1,4 +1,7 @@
 {
+  "status": "200",
+  "msg": "成功",
+  "timestamp": "1562223056182",
   "data": [
     {
       "id": 1,
@@ -39,6 +42,5 @@
       "path": "productCheck",
       "children": []
     }
-  ],
-  "resultCode": 1
+  ]
 }

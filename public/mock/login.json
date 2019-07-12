@@ -1,4 +1,5 @@
 {
-	"resultCode": 1,
-	"data": true
+  "status": "200",
+  "msg": "成功",
+  "timestamp": "1562223056182"
 }

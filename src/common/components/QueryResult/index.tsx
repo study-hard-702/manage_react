@@ -90,8 +90,8 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
         <Table
           bordered
           rowKey="num"
-          dataSource={proList}
           columns={this._filterColumns()}
+          dataSource={proList}
           pagination={pagination}/>
       </div>
     );

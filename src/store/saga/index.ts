@@ -22,7 +22,7 @@ function* login(action: any) {
   // 执行 myFetch 函数，返回值赋值给 res
   const res = yield call(myFetch)
   console.log('res', res)
-  if (res.resultCode === 1) {
+  if (res.status === '200') {
     window.sessionStorage.setItem('loginStatus', '1')
     gotoPath('/home');
     // dispatch 一个 action 到 reducer, payload 是请求返回的数据
@@ -43,11 +43,11 @@ function* getNav() {
   // 执行 myFetch 函数，返回值赋值给 res
   const res = yield call(myFetch)
   console.log('res', res)
-  if (res.resultCode === 1) {
+  if (res.status === '200') {
     // dispatch 一个 action 到 reducer, payload 是请求返回的数据
     yield put({
       type: SET_NAV,
-      data: res.data
+      data: true
     })
   }
 }

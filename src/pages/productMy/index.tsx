@@ -28,9 +28,7 @@ function mapStateToProps(state: any): ProductMyProps {
 }
 
 function mapDispatchToProps(dispatch: any, ownProps: any): ProductMyProps {
-  return {
-
-  }
+  return {}
 }
 
 export default ProductMy;

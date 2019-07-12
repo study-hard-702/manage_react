@@ -3,21 +3,59 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Table} from 'antd';
 import BaseComponent from "../../BaseComponent"
+import {fetchGetProList} from "../../../api"
 import './style.less';
 
 export interface QueryResultProps {
   keyTyle?: string,
-  proList?: any;
-  proListDesc?: any,
   columns?: any,
   pagination?: any,
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class QueryResult extends BaseComponent<QueryResultProps, {}> {
-  _filterProList() {
-    const {keyTyle, proList} = this.props;
-    proList.forEach((item: any):any => {
+  state = {
+    proList: []
+  }
+
+  componentWillMount() {
+    this._getProList()
+  }
+
+  _getProList() {
+    const {keyTyle} = this.props;
+    fetchGetProList({}).then((res: any) => {
+      const data = res.data;
+      if (data.status === '200') {
+        let productStatus = ["", "初始", "待审核", "审核未通过", "已发布", "审核通过"];
+        let productTypes = ["", "旅游保险", "意外保险", "行李保险", "家庭保险", "健康保险", "责任险"];
+        let myArray: any = []
+        data.data.data.forEach((item: any, index: number) => {
+          let obj: any = {};
+          obj.num = index + 1;
+          obj.product_code = item.product_code;
+          obj.product_name = item.product_name;
+          obj.productType = productTypes[item.type];
+          obj.demand_number = item.demand_number;
+          obj.url = item.url;
+          obj.status = productStatus[item.status];
+          if (keyTyle !== 'ProductCheck') {
+            obj.update_time = item.update_time;
+          }
+          obj.handel = '修改 提交 审核';
+          myArray.push(obj)
+        })
+        // 设置获取列表数据
+        this.setState({
+          proList: this._filterProList(myArray)
+        })
+      }
+    })
+  }
+
+  _filterProList(proList: any) {
+    const {keyTyle} = this.props;
+    proList.forEach((item: any): any => {
       item.handel = (
         <span>
           {(keyTyle === 'ProductAll' || keyTyle === 'ProductMy') ?
@@ -45,13 +83,14 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
+    const {proList} = this.state;
     const {pagination} = this.props;
     return (
       <div className="QueryResult">
         <Table
           bordered
           rowKey="num"
-          dataSource={this._filterProList()}
+          dataSource={proList}
           columns={this._filterColumns()}
           pagination={pagination}/>
       </div>
@@ -62,8 +101,6 @@ class QueryResult extends BaseComponent<QueryResultProps, {}> {
 function mapStateToProps(state: any, ownProps: any): QueryResultProps {
   return {
     keyTyle: ownProps.keyTyle,
-    proList: state.getIn(['queryresult', 'proList']),
-    proListDesc: state.getIn(['queryresult', 'proListDesc']),
     columns: [
       {
         title: '序号',

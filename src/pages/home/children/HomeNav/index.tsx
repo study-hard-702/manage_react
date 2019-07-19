@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from 'react-redux';
-import {Tree} from 'antd';
+import {Tree, Icon} from 'antd';
 import BaseComponent from "../../../../common/BaseComponent";
 import {gotoPath} from "../../../../utils/history";
 import {actionCreators} from '../../store/index';
@@ -10,6 +10,7 @@ const {TreeNode} = Tree;
 
 export interface HomeNavProps {
   navTree?: any;
+  currentNav?: any;
   getNavTree?: () => any;
   selectNode?: (props: any, id: string) => any;
 }
@@ -41,6 +42,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
             title={item.name}
             key={item.id}
             path={item.path}
+            icon={<span className={'iconfont HomeNav-icon HomeNav-icon-' + (item.icon ? item.icon : 'child')}/>}
           >
             {this._renderTree(item.children)}
           </TreeNode>
@@ -50,12 +52,15 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
   }
 
   doRender(): React.ReactElement<{}> {
-    const {navTree} = this.props;
+    const {navTree, currentNav} = this.props;
     console.log('navTree', navTree)
+    console.log('currentNav', currentNav)
     return (
       <div className="HomeNav">
         <Tree
-          showLine={true}
+          showLine={false}
+          showIcon={true}
+          defaultExpandAll={true}
           onSelect={(checkedKeys: any, e: any) => {
             const {node} = e;
             const {props} = node;
@@ -71,6 +76,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
 function mapStateToProps(state: any): HomeNavProps {
   return {
     navTree: state.getIn(['home', 'navTree']),
+    currentNav: state.getIn(['home', 'currentNav']),
   };
 }
 

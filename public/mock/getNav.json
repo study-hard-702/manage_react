@@ -7,11 +7,13 @@
       "id": 1,
       "name": "工作台",
       "path": "workBench",
+      "icon": "workBench",
       "children": []
     },
     {
       "id": 2,
       "name": "产品管理",
+      "icon": "productMannger",
       "children": [
         {
           "id": 21,
@@ -40,6 +42,7 @@
       "id": 3,
       "name": "审核管理",
       "path": "productCheck",
+      "icon": "productCheck",
       "children": []
     }
   ]

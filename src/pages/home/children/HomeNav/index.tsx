@@ -51,6 +51,7 @@ class HomeNav extends BaseComponent<HomeNavProps, {}> {
 
   doRender(): React.ReactElement<{}> {
     const {navTree} = this.props;
+    console.log('navTree', navTree)
     return (
       <div className="HomeNav">
         <Tree

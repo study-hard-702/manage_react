@@ -28,7 +28,7 @@ function* login(action: any) {
     // dispatch 一个 action 到 reducer, payload 是请求返回的数据
     yield put({
       type: CHANGE_LOGINSTATUS,
-      loginStatus: res.data
+      loginStatus: true
     })
   }
 }
@@ -47,7 +47,7 @@ function* getNav() {
     // dispatch 一个 action 到 reducer, payload 是请求返回的数据
     yield put({
       type: SET_NAV,
-      data: true
+      data: res.data
     })
   }
 }
